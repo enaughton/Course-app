@@ -1,10 +1,8 @@
 import React from "react";
-import Header from "./Header";
 
 const SignUp = props => {
   return (
     <div>
-      <Header />
       <div className="bounds">
         <div className="grid-33 centered signin">
           <h1>Sign Up</h1>
@@ -66,7 +64,7 @@ const SignUp = props => {
                 </button>
                 <button
                   className="button button-secondary"
-                  onclick="event.preventDefault(); location.href='index.html';"
+                  onclick="event.preventDefault(); location.href='/';"
                 >
                   Cancel
                 </button>
@@ -75,8 +73,8 @@ const SignUp = props => {
           </div>
           <p>&nbsp;</p>
           <p>
-            Already have a user account? <a href="sign-in.html">Click here</a>{" "}
-            to sign in!
+            Already have a user account? <a href="/signin">Click here</a> to
+            sign in!
           </p>
         </div>
       </div>

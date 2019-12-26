@@ -1,14 +1,11 @@
 import React from "react";
-import Header from "./Header";
 
 const Courses = props => {
   return (
     <div>
-      <Header />
-
       <div className="bounds">
         <div className="grid-33">
-          <a className="course--module course--link" href="course-detail.html">
+          <a className="course--module course--link" href="/CourseDetail">
             <h4 className="course--label">Course</h4>
             <h3 className="course--title">Build a Basic Bookcase</h3>
           </a>

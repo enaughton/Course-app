@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import "./global.css";
 import Header from "./components/Header";
@@ -6,8 +7,8 @@ import Courses from "./components/Courses";
 import CourseDetail from "./components/CourseDetail";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import UpdateCourse from "./components/UpdateCourse";
-import CreateCourse from "./components/CreateCourse";
+//import UpdateCourse from "./components/UpdateCourse";
+//import CreateCourse from "./components/CreateCourse";
 
 const course = fetch("http://localhost:5000/api/courses/").then(res =>
   res.json()
@@ -15,12 +16,16 @@ const course = fetch("http://localhost:5000/api/courses/").then(res =>
 
 console.log(course);
 
-function App() {
-  return (
+export default () => (
+  <Router>
+    <Header />
     <div>
-      <CourseDetail />
+      <Switch>
+        <Route exact path="/" component={Courses} />
+        <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/coursedetail" component={CourseDetail} />
+      </Switch>
     </div>
-  );
-}
-
-export default App;
+  </Router>
+);

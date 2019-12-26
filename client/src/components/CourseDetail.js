@@ -1,10 +1,8 @@
 import React from "react";
-import Header from "./Header";
 
 const CourseDetail = props => {
   return (
     <div>
-      <Header />
       <div classNameName="actions--bar">
         <div className="bounds">
           <div className="grid-100">
@@ -16,7 +14,7 @@ const CourseDetail = props => {
                 Delete Course
               </a>
             </span>
-            <a className="button button-secondary" href="index.html">
+            <a className="button button-secondary" href="/">
               Return to List
             </a>
           </div>

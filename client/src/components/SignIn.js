@@ -1,11 +1,9 @@
 import React from "react";
-import Header from "./Header";
 
 const SignIn = props => {
   return (
     <div>
       <div>
-        <Header />
         <div class="bounds">
           <div class="grid-33 centered signin">
             <h1>Sign In</h1>
@@ -46,8 +44,8 @@ const SignIn = props => {
             </div>
             <p>&nbsp;</p>
             <p>
-              Don't have a user account? <a href="sign-up.html">Click here</a>{" "}
-              to sign up!
+              Don't have a user account? <a href="/signup">Click here</a> to
+              sign up!
             </p>
           </div>
         </div>
