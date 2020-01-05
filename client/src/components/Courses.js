@@ -1,4 +1,5 @@
 import React from "react";
+//import Data from "./Data";
 
 const Courses = props => {
   return (
