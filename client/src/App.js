@@ -2,32 +2,37 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import withContext from "./Context";
+import PrivateRoute from "./PrivateRoute";
 
 import "./global.css";
 import Header from "./components/Header";
+import Authenticated from "./components/Authenticated";
 import Courses from "./components/Courses";
 import CourseDetail from "./components/CourseDetail";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
+import NotFound from "./components/NotFound";
+import UserSignIn from "./components/UserSignIn";
+import UserSignOut from "./components/UserSignOut";
+import UserSignUp from "./components/UserSignUp";
 import UpdateCourse from "./components/UpdateCourse";
-import CreateCourse from "./components/CreateCourse";
+//import CreateCourse from "./components/CreateCourse";
 
-/*const course = fetch("http://localhost:5000/api/courses/").then(res =>
-  res.json()
-);
+const HeaderWithContext = withContext(Header);
+const AuthWithContext = withContext(Authenticated);
+const UserSignUpWithContext = withContext(UserSignUp);
+const UserSignInWithContext = withContext(UserSignIn);
+const UserSignOutWithContext = withContext(UserSignOut);
 
-console.log(course);
-*/
 export default () => (
   <Router>
     <Header />
     <div>
       <Switch>
         <Route exact path="/" component={Courses} />
-        <Route exact path="/signin" component={SignIn} />
-        <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/coursedetail" component={CourseDetail} />
-        <Route exact path="/UpdateCourse" component={UpdateCourse} />
+        <PrivateRoute path="/authenticated" component={AuthWithContext} />
+        <Route path="/signin" component={UserSignInWithContext} />
+        <Route path="/signup" component={UserSignUpWithContext} />
+        <Route path="/signout" component={UserSignOutWithContext} />
+        <Route component={NotFound} />
       </Switch>
     </div>
   </Router>
