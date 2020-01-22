@@ -12,6 +12,15 @@ export class Provider extends Component {
     super();
     this.data = new Data();
   }
+  getCourses = async () => {
+    const response = await this.api(`/courses`, "GET", null);
+    if (response.status === 200) {
+      //returns all course data if successful
+      return response.json().then(responseData => responseData);
+    } else {
+      throw new Error();
+    }
+  };
 
   render() {
     const { authenticatedUser } = this.state;
@@ -20,7 +29,8 @@ export class Provider extends Component {
       data: this.data,
       actions: {
         signIn: this.signIn,
-        signOut: this.signOut
+        signOut: this.signOut,
+        getCourses: this.getCourses
       }
     };
     return (

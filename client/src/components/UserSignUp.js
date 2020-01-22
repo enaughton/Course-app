@@ -4,14 +4,15 @@ import Form from "./Form";
 
 export default class UserSignUp extends Component {
   state = {
-    name: "",
-    username: "",
+    firstName: "",
+    lastName: "",
+    emailAddress: "",
     password: "",
     errors: []
   };
 
   render() {
-    const { name, username, password, errors } = this.state;
+    const { firstName, lastName, emailAddress, password, errors } = this.state;
 
     return (
       <div className="bounds">
@@ -25,20 +26,28 @@ export default class UserSignUp extends Component {
             elements={() => (
               <React.Fragment>
                 <input
-                  id="name"
-                  name="name"
+                  id="firstName"
+                  name="firstName"
                   type="text"
-                  value={name}
+                  value={firstName}
                   onChange={this.change}
-                  placeholder="Name"
+                  placeholder="First Name"
                 />
                 <input
-                  id="username"
-                  name="username"
+                  id="lastName"
+                  name="lastName"
                   type="text"
-                  value={username}
+                  value={lastName}
                   onChange={this.change}
-                  placeholder="User Name"
+                  placeholder="Last Name"
+                />
+                <input
+                  id="emailAddress"
+                  name="emailAddress"
+                  type="text"
+                  value={emailAddress}
+                  onChange={this.change}
+                  placeholder="emailAddress"
                 />
                 <input
                   id="password"
@@ -73,12 +82,13 @@ export default class UserSignUp extends Component {
 
   submit = () => {
     const { context } = this.props;
-    const { name, username, password } = this.state;
+    const { firstName, lastName, emailAddress, password } = this.state;
 
     // Create user
     const user = {
-      name,
-      username,
+      firstName,
+      lastName,
+      emailAddress,
       password
     };
 
@@ -88,7 +98,7 @@ export default class UserSignUp extends Component {
         if (errors.length) {
           this.setState({ errors });
         } else {
-          context.actions.signIn(username, password).then(() => {
+          context.actions.signIn(emailAddress, password).then(() => {
             this.props.history.push("/authenticated");
           });
         }

@@ -5,14 +5,15 @@ export default class Header extends React.PureComponent {
   render() {
     const { context } = this.props;
     const authUser = context.authenticatedUser;
+    console.log(authUser);
     return (
       <div className="header">
         <div className="bounds">
-          <h1 className="header--logo">MyAuth</h1>
+          <h1 className="header--logo">Course App</h1>
           <nav>
             {authUser ? (
               <React.Fragment>
-                <span>Welcome, {authUser.name}!</span>
+                <span>Welcome, {authUser.firstName}!</span>
                 <Link to="/signout">Sign Out</Link>
               </React.Fragment>
             ) : (

@@ -1,34 +1,33 @@
 import React from "react";
 
 class Courses extends React.Component {
+  constructor() {
+    super();
+    this.state = { course: [] };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:5000/api/courses")
+      .then(response => response.json())
+      .then(responseData => {
+        this.setState({ course: responseData.course });
+      });
+  }
+
   render() {
+    console.log(this.state.course);
     return (
       <div>
         <div className="bounds">
-          <div className="grid-33">
-            <a className="course--module course--link" href="/CourseDetail">
-              <h4 className="course--label">Courses</h4>
-              <h3 className="course--title">Build a Basic Bookcase</h3>
-            </a>
-          </div>
-          <div className="grid-33">
-            <a
-              className="course--module course--link"
-              href="course-detail.html"
-            >
-              <h4 className="course--label">Course</h4>
-              <h3 className="course--title">Learn How to Program</h3>
-            </a>
-          </div>
-          <div className="grid-33">
-            <a
-              className="course--module course--link"
-              href="course-detail.html"
-            >
-              <h4 className="course--label">Course</h4>
-              <h3 className="course--title">Learn How to Test Programs</h3>
-            </a>
-          </div>
+          {this.state.course.map(course => (
+            <div className="grid-33">
+              <a className="course--module course--link" href="/CourseDetail">
+                <h4 className="course--label">{course.id}</h4>
+                <h3 className="course--title">{course.title}</h3>
+              </a>
+            </div>
+          ))}
+
           <div className="grid-33">
             <a
               className="course--module course--add--module"

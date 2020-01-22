@@ -56,4 +56,21 @@ export default class Data {
       throw new Error();
     }
   }
+
+  /*
+  async getCroses() {
+    const response = await this.api("/courses");
+    return response.json().then(data => data);
+  }
+  */
+  //method used to retrieve all course data
+  getCourses = async () => {
+    const response = await this.api(`/courses`, "GET", null);
+    if (response.status === 200) {
+      //returns all course data if successful
+      return response.json().then(responseData => responseData);
+    } else {
+      throw new Error();
+    }
+  };
 }
