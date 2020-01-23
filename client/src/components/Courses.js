@@ -22,7 +22,9 @@ class Courses extends React.Component {
           {this.state.course.map(course => (
             <div className="grid-33">
               <a className="course--module course--link" href="/CourseDetail">
-                <h4 className="course--label">{course.id}</h4>
+                <h4 className="course--label" >
+                  {course.id}
+                </h4>
                 <h3 className="course--title">{course.title}</h3>
               </a>
             </div>
@@ -31,7 +33,7 @@ class Courses extends React.Component {
           <div className="grid-33">
             <a
               className="course--module course--add--module"
-              href="create-course.html"
+              href="/CreateCourse"
             >
               <h3 className="course--add--title">
                 <svg

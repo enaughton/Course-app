@@ -3,11 +3,12 @@ import { render } from "react-dom";
 import Courses from "./Courses";
 
 class CourseDetail extends React.Component {
-  constructor() {
-    super();
-    this.state = { course: [this.state] };
+  constructor(props) {
+    super(props);
+    this.state = { id: this.props };
   }
 
+  /*
   componentDidMount() {
     fetch(`http://localhost:5000/api/courses/:id`)
       .then(response => response.json())
@@ -15,9 +16,10 @@ class CourseDetail extends React.Component {
         this.setState({ course: responseData.course });
       });
   }
+  */
 
   render() {
-    console.log(this.state.course);
+    console.log(this.state);
     return (
       <div>
         <div className="actions--bar">

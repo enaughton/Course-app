@@ -12,6 +12,7 @@ export class Provider extends Component {
     super();
     this.data = new Data();
   }
+  /*
   getCourses = async () => {
     const response = await this.api(`/courses`, "GET", null);
     if (response.status === 200) {
@@ -21,7 +22,7 @@ export class Provider extends Component {
       throw new Error();
     }
   };
-
+*/
   render() {
     const { authenticatedUser } = this.state;
     const value = {

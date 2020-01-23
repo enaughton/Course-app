@@ -62,7 +62,6 @@ export default class Data {
     const response = await this.api("/courses");
     return response.json().then(data => data);
   }
-  */
   //method used to retrieve all course data
   getCourses = async () => {
     const response = await this.api(`/courses`, "GET", null);
@@ -73,4 +72,5 @@ export default class Data {
       throw new Error();
     }
   };
+    */
 }
