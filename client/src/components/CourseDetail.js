@@ -5,21 +5,19 @@ import Courses from "./Courses";
 class CourseDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { id: this.props };
+    this.state = { courses: [] };
   }
 
-  /*
   componentDidMount() {
-    fetch(`http://localhost:5000/api/courses/:id`)
+    fetch(`/courses/:${this.props.route}`)
       .then(response => response.json())
       .then(responseData => {
-        this.setState({ course: responseData.course });
+        this.setState({ courses: responseData.course });
       });
   }
-  */
 
   render() {
-    console.log(this.state);
+    console.log(this.props.route);
     return (
       <div>
         <div className="actions--bar">

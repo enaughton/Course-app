@@ -29,7 +29,7 @@ export default () => (
     <div>
       <Switch>
         <Route exact path="/" component={Courses} />
-        <Route path="/CourseDetail" component={CourseDetail} />
+        <Route path="/courses/:id" component={CourseDetail} />
         <PrivateRoute path="/authenticated" component={AuthWithContext} />
         <PrivateRoute
           path="/CreateCourse"

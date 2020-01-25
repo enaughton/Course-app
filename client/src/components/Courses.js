@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 class Courses extends React.Component {
   constructor() {
     super();
@@ -21,12 +23,10 @@ class Courses extends React.Component {
         <div className="bounds">
           {this.state.course.map(course => (
             <div className="grid-33">
-              <a className="course--module course--link" href="/CourseDetail">
-                <h4 className="course--label" >
-                  {course.id}
-                </h4>
+              <Link className="course--module course--link" to=`/courses/${course.id}`>
+                <h4 className="course--label">{course.id}</h4>
                 <h3 className="course--title">{course.title}</h3>
-              </a>
+              </Link>
             </div>
           ))}
 
