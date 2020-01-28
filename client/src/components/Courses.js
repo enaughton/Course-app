@@ -17,7 +17,6 @@ class Courses extends React.Component {
   }
 
   render() {
-    console.log(this.state.course);
     return (
       <div>
         <div className="bounds">
