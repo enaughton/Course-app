@@ -27,7 +27,7 @@ class CourseDetail extends React.Component {
           <div className="bounds">
             <div className="grid-100">
               <span>
-                <a className="button" href="update-course.html">
+                <a className="button" href="/UpdateCourse">
                   Update Course
                 </a>
                 <a className="button" href="index.html">

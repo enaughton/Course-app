@@ -1,22 +1,11 @@
 import React from "react";
 
 const UpdateCourse = props => {
+  console.log(props);
   return (
     <div>
       <div id="root">
         <div>
-          <div className="header">
-            <div className="bounds">
-              <h1 className="header--logo">Courses</h1>
-              <nav>
-                <span>Welcome Joe Smith!</span>
-                <a className="signout" href="index.html">
-                  Sign Out
-                </a>
-              </nav>
-            </div>
-          </div>
-
           <div className="bounds course--detail">
             <h1>Update Course</h1>
             <div>
