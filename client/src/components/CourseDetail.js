@@ -1,6 +1,5 @@
 import React from "react";
-import { render } from "react-dom";
-import Courses from "./Courses";
+import { Link } from "react-router-dom";
 
 class CourseDetail extends React.Component {
   constructor(props) {
@@ -27,9 +26,13 @@ class CourseDetail extends React.Component {
           <div className="bounds">
             <div className="grid-100">
               <span>
-                <a className="button" href="/UpdateCourse">
-                  Update Course
-                </a>
+                <Link
+                  className="button"
+                  to={`/UpdateCourse/${this.props.match.params.id}`}
+                >
+                  {" "}
+                  Update Course{" "}
+                </Link>
                 <a className="button" href="index.html">
                   Delete Course
                 </a>
@@ -46,7 +49,7 @@ class CourseDetail extends React.Component {
               <h4 className="course--label">Course</h4>
               <h3 className="course--title">{this.state.course.title}</h3>
               <p>
-                By {this.state.user.firstName} {this.state.user.lastName}{" "}
+                By {this.state.user.firstName} {this.state.user.lastName}
               </p>
             </div>
             <div className="course--description">

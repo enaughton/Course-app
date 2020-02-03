@@ -3,17 +3,8 @@ import React from "react";
 const CreateCourse = props => {
   return (
     <div className="bounds course--detail">
-      <h1>Create Course</h1>
       <div>
-        <div>
-          <h2 className="validation--errors--label">Validation errors</h2>
-          <div className="validation-errors">
-            <ul>
-              <li>Please provide a value for "Title"</li>
-              <li>Please provide a value for "Description"</li>
-            </ul>
-          </div>
-        </div>
+        <h1>Create Course</h1>
         <form>
           <div className="grid-66">
             <div className="course--header">

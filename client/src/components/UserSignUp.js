@@ -47,7 +47,7 @@ export default class UserSignUp extends Component {
                   type="text"
                   value={emailAddress}
                   onChange={this.change}
-                  placeholder="emailAddress"
+                  placeholder="Email Address"
                 />
                 <input
                   id="password"
