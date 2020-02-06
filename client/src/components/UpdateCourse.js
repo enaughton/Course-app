@@ -3,7 +3,12 @@ import React from "react";
 class UpdateCourse extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { course: [], user: [] };
+    this.state = {
+      course: [],
+      user: []
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -13,9 +18,24 @@ class UpdateCourse extends React.Component {
         console.log(responseData);
         this.setState({
           course: responseData.course,
-          user: responseData.course.user
+          user: responseData.course.user,
+          title: responseData.course.title,
+          description: responseData.course.description,
+          estimatedTime: responseData.course.estimatedTime,
+          materialsNeeded: responseData.course.materialsNeeded
         });
       });
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+    console.log(this.state.name);
   }
 
   render() {
@@ -29,17 +49,18 @@ class UpdateCourse extends React.Component {
                 <form>
                   <div className="grid-66">
                     <div className="course--header">
-                      <h4 className="course--label">Course</h4>
-                      <div>
+                      <label className="course--label">
+                        Course Title
                         <input
                           id="title"
                           name="title"
                           type="text"
                           className="input-title course--title--input"
-                          placeholder="Course title..."
-                          value={this.state.course.title}
+                          value={this.state.title}
+                          onChange={this.handleInputChange}
                         />
-                      </div>
+                      </label>
+
                       <p>
                         By {this.state.user.firstName}{" "}
                         {this.state.user.lastName}
@@ -51,10 +72,9 @@ class UpdateCourse extends React.Component {
                           id="description"
                           name="description"
                           className=""
-                          placeholder={this.state.course.description}
-                        >
-                          {this.state.course}
-                        </textarea>
+                          value={this.state.description}
+                          onChange={this.handleInputChange}
+                        ></textarea>
                       </div>
                     </div>
                   </div>
@@ -69,7 +89,8 @@ class UpdateCourse extends React.Component {
                               name="estimatedTime"
                               type="text"
                               className="course--time--input"
-                              placeholder={this.state.course.estimatedTime}
+                              onChange={this.handleInputChange}
+                              value={this.state.course.estimatedTime}
                             />
                           </div>
                         </li>
@@ -80,7 +101,8 @@ class UpdateCourse extends React.Component {
                               id="materialsNeeded"
                               name="materialsNeeded"
                               className=""
-                              placeholder={this.state.course.materialsNeeded}
+                              onChange={this.handleInputChange}
+                              value={this.state.course.materialsNeeded}
                             ></textarea>
                           </div>
                         </li>
@@ -93,7 +115,7 @@ class UpdateCourse extends React.Component {
                     </button>
                     <button
                       className="button button-secondary"
-                      onclick="event.preventDefault(); location.href='course-detail.html';"
+                      onClick="event.preventDefault(); location.href='course-detail.html';"
                     >
                       Cancel
                     </button>

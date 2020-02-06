@@ -28,7 +28,7 @@ class CourseDetail extends React.Component {
               <span>
                 <Link
                   className="button"
-                  to={`/UpdateCourse/${this.props.match.params.id}`}
+                  to={`/course/${this.props.match.params.id}/update`}
                 >
                   {" "}
                   Update Course{" "}
