@@ -1,9 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class CreateCourse extends React.Component {
   constructor(props) {
     super(props);
     this.state = { course: [], user: [] };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+    console.log(this.state.title);
+  }
+
+  handleSubmit(event) {
+    alert("You changed " + this.state.title + this.state.description);
+    event.preventDefault();
   }
 
   render() {
@@ -11,7 +31,7 @@ class CreateCourse extends React.Component {
       <div className="bounds course--detail">
         <div>
           <h1>Create Course</h1>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div className="grid-66">
               <div className="course--header">
                 <h4 className="course--label">Course</h4>
@@ -24,7 +44,7 @@ class CreateCourse extends React.Component {
                     placeholder="Course title..."
                   />
                 </div>
-                <p>By Joe Smith</p>
+                <p></p>
               </div>
               <div className="course--description">
                 <div>
@@ -49,7 +69,6 @@ class CreateCourse extends React.Component {
                         type="text"
                         className="course--time--input"
                         placeholder="Hours"
-                        value=""
                       />
                     </div>
                   </li>
@@ -71,12 +90,9 @@ class CreateCourse extends React.Component {
               <button className="button" type="submit">
                 Create Course
               </button>
-              <button
-                className="button button-secondary"
-                onclick="event.preventDefault(); location.href='index.html';"
-              >
+              <Link className="button button-secondary" to={`/`}>
                 Cancel
-              </button>
+              </Link>
             </div>
           </form>
         </div>

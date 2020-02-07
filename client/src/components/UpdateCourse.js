@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 class UpdateCourse extends React.Component {
   constructor(props) {
     super(props);
@@ -9,6 +9,7 @@ class UpdateCourse extends React.Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +39,11 @@ class UpdateCourse extends React.Component {
     console.log(this.state.name);
   }
 
+  handleSubmit(event) {
+    alert("You changed " + this.state.title + this.state.description);
+    event.preventDefault();
+  }
+
   render() {
     return (
       <div>
@@ -46,7 +52,7 @@ class UpdateCourse extends React.Component {
             <div className="bounds course--detail">
               <h1>Update Course</h1>
               <div>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                   <div className="grid-66">
                     <div className="course--header">
                       <label className="course--label">
@@ -113,12 +119,9 @@ class UpdateCourse extends React.Component {
                     <button className="button" type="submit">
                       Update Course
                     </button>
-                    <button
-                      className="button button-secondary"
-                      onClick="event.preventDefault(); location.href='course-detail.html';"
-                    >
+                    <Link className="button button-secondary" to={`/`}>
                       Cancel
-                    </button>
+                    </Link>
                   </div>
                 </form>
               </div>
