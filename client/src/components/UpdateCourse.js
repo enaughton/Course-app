@@ -1,10 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Data from "../Data";
 class UpdateCourse extends React.Component {
   constructor(props) {
     super(props);
-    this.data = new Data();
     this.state = {
       course: [],
       user: []
@@ -18,6 +16,7 @@ class UpdateCourse extends React.Component {
     fetch(`http://localhost:5000/api/courses/${this.props.match.params.id}`)
       .then(response => response.json())
       .then(responseData => {
+        console.log(responseData);
         this.setState({
           course: responseData.course,
           user: responseData.course.user,
@@ -37,21 +36,11 @@ class UpdateCourse extends React.Component {
     this.setState({
       [name]: value
     });
+    console.log(this.state.name);
   }
 
   handleSubmit(event) {
-    const { context } = this.props;
-
-    const {
-      id,
-      title,
-      description,
-      estimatedTime,
-      materialsNeeded
-    } = this.state;
-
-    this.data.updateCourse();
-    console.log(this.state);
+    alert("You changed " + this.state.title + this.state.description);
     event.preventDefault();
   }
 

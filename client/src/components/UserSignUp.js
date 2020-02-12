@@ -91,7 +91,7 @@ export default class UserSignUp extends Component {
       emailAddress,
       password
     };
-
+    console.log(user);
     context.data
       .createUser(user)
       .then(errors => {

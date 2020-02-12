@@ -58,20 +58,8 @@ export default class Data {
     }
   }
 
-  async updateCourse(course) {
-    const response = await this.api("/courses/:id", "PUT", course);
-    console.log(response);
-    if (response.status === 201) {
-      return [];
-    } else if (response.status === 400) {
-      return response.json().then(data => {
-        return data.errors;
-      });
-    }
-  }
-
   /*
-  async getCrouses() {
+  async getCroses() {
     const response = await this.api("/courses");
     return response.json().then(data => data);
   }
