@@ -109,6 +109,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [0208/082952.757:ERROR:crash_report_database_win.cc(428)] unexpected header
 [0209/093731.727:ERROR:crash_report_database_win.cc(428)] unexpected header
 [0209/093936.669:ERROR:crash_report_database_win.cc(428)] unexpected header
@@ -124,6 +125,8 @@
 [0211/190838.989:ERROR:crash_report_database_win.cc(428)] unexpected header
 [0211/195246.704:ERROR:crash_report_database_win.cc(428)] unexpected header
 [0211/200803.092:ERROR:crash_report_database_win.cc(428)] unexpected header
+=======
+>>>>>>> parent of 02e3803... 401 Error when Updating Course
 =======
 >>>>>>> parent of 02e3803... 401 Error when Updating Course
 =======
