@@ -59,7 +59,7 @@ export default class Data {
   }
 
   async updateCourse(course) {
-    const response = await this.apt("/courses/:id", "PUT", course);
+    const response = await this.api("/courses/:id", "PUT", null, true);
     console.log(response);
     if (response.status === 200) {
       return response.json().then(data => data);

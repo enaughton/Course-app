@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 class Courses extends React.Component {
   constructor() {
     super();
-    this.state = { course: [], authenticatedUser: null };
+    this.state = { course: [] };
   }
 
   componentDidMount() {
