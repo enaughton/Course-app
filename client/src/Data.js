@@ -58,6 +58,20 @@ export default class Data {
     }
   }
 
+  async updateCourse(course) {
+    const response = await this.apt("/courses/:id", "PUT", course);
+    console.log(response);
+    if (response.status === 200) {
+      return response.json().then(data => data);
+    } else if (response.status === 401) {
+      return response.json().then(data => {
+        return data.errors;
+      });
+    } else {
+      throw new Error();
+    }
+  }
+
   /*
   async getCroses() {
     const response = await this.api("/courses");

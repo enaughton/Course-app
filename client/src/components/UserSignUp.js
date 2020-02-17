@@ -99,7 +99,7 @@ export default class UserSignUp extends Component {
           this.setState({ errors });
         } else {
           context.actions.signIn(emailAddress, password).then(() => {
-            this.props.history.push("/authenticated");
+            this.props.history.push("/");
           });
         }
       })

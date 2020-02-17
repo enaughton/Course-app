@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 class UpdateCourse extends React.Component {
   constructor(props) {
     super(props);
@@ -36,12 +37,45 @@ class UpdateCourse extends React.Component {
     this.setState({
       [name]: value
     });
-    console.log(this.state.name);
   }
 
   handleSubmit(event) {
-    alert("You changed " + this.state.title + this.state.description);
+    const { context } = this.props;
+    console.log({ context });
     event.preventDefault();
+
+    const {
+      course,
+      user,
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded
+    } = this.state;
+
+    // Creates Update
+    const update = {
+      course,
+      user,
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded
+    };
+    console.log(update);
+    context.data
+      .updateCourse(update)
+      .then(errors => {
+        if (errors && errors.length) {
+          this.setState({ errors });
+        } else {
+          this.props.history.push(`/course/${this.props.match.params.id}`);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        this.props.history.push("/error");
+      });
   }
 
   render() {

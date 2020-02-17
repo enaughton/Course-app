@@ -12,19 +12,10 @@ export class Provider extends Component {
     super();
     this.data = new Data();
   }
-  /*
-  getCourses = async () => {
-    const response = await this.api(`/courses`, "GET", null);
-    if (response.status === 200) {
-      //returns all course data if successful
-      return response.json().then(responseData => responseData);
-    } else {
-      throw new Error();
-    }
-  };
-*/
+
   render() {
     const { authenticatedUser } = this.state;
+
     const value = {
       authenticatedUser,
       data: this.data,
@@ -45,6 +36,9 @@ export class Provider extends Component {
       this.setState(() => {
         return { authenticatedUser: user };
       });
+      const cookieOptions = {
+        expires: 1 // 1 day
+      };
       Cookies.set("authenticatedUser", JSON.stringify(user), { expires: 1 });
     }
     return user;
