@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 class UpdateCourse extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       course: [],
-      user: []
+      user: [],
+      authenticatedUser: Cookies.getJSON("authenticatedUser") || null
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -17,7 +19,6 @@ class UpdateCourse extends React.Component {
     fetch(`http://localhost:5000/api/courses/${this.props.match.params.id}`)
       .then(response => response.json())
       .then(responseData => {
-        console.log(responseData);
         this.setState({
           course: responseData.course,
           user: responseData.course.user,
@@ -41,8 +42,6 @@ class UpdateCourse extends React.Component {
 
   handleSubmit(event) {
     const { context } = this.props;
-    console.log({ context });
-    event.preventDefault();
 
     const {
       course,
@@ -62,20 +61,19 @@ class UpdateCourse extends React.Component {
       estimatedTime,
       materialsNeeded
     };
-    console.log(update);
-    context.data
-      .updateCourse(update)
-      .then(errors => {
-        if (errors && errors.length) {
-          this.setState({ errors });
-        } else {
-          this.props.history.push(`/course/${this.props.match.params.id}`);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        this.props.history.push("/error");
-      });
+
+    if (
+      context.authenticatedUser.emailAddress === this.state.user.emailAddress
+    ) {
+      console.log("winner");
+      context.data.updateCourse(
+        update,
+        this.state.user.emailAddress,
+        this.state.user.password
+      );
+    }
+
+    event.preventDefault();
   }
 
   render() {
