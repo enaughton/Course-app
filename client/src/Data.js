@@ -70,11 +70,13 @@ export default class Data {
       }
     );
     console.log(response);
-    if (response.status === 200) {
+    if (response.status === 204) {
       return [];
     } else if (response.status === 401) {
+      return null;
+    } else if (response.status === 400) {
       return response.json().then(data => {
-        return data.errors;
+        return data.errors.err.errors;
       });
     } else {
       throw new Error();

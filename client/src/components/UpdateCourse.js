@@ -52,6 +52,8 @@ class UpdateCourse extends React.Component {
       materialsNeeded
     } = this.state;
 
+    const authUser = context.authenticatedUser;
+
     // Creates Update
     const update = {
       course,
@@ -62,16 +64,23 @@ class UpdateCourse extends React.Component {
       materialsNeeded
     };
 
-    if (
-      context.authenticatedUser.emailAddress === this.state.user.emailAddress
-    ) {
-      console.log("winner");
-      context.data.updateCourse(
-        update,
-        this.state.user.emailAddress,
-        this.state.user.password
-      );
-    }
+    context.data
+      .updateCourse(course, authUser.emailAddress, authUser.password)
+      .then(errors => {
+        if (errors.length) {
+          this.setState({ errors });
+        } else {
+          context.actions
+            .signIn(authUser.emailAddress, authUser.password)
+            .then(() => {
+              this.props.history.push(`/courses/${course.id}`);
+            });
+        }
+      })
+      .catch(err => {
+        console.log(err && err.length);
+        this.props.history.push("/error");
+      });
 
     event.preventDefault();
   }
