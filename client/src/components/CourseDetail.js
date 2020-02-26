@@ -1,10 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 class CourseDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { course: [], user: [] };
+    this.state = {
+      course: [],
+      user: [],
+      authenticatedUser: Cookies.getJSON("authenticatedUser") || null
+    };
   }
 
   componentDidMount() {
@@ -19,24 +24,32 @@ class CourseDetail extends React.Component {
   }
 
   render() {
-    console.log(this.state.user.firstName, this.state.user.lastName);
+    const authUser = this.state.authenticatedUser;
+
     return (
       <div>
         <div className="actions--bar">
           <div className="bounds">
             <div className="grid-100">
-              <span>
-                <Link
-                  className="button"
-                  to={`/course/${this.props.match.params.id}/update`}
-                >
-                  {" "}
-                  Update Course{" "}
-                </Link>
-                <a className="button" href="index.html">
-                  Delete Course
-                </a>
-              </span>
+              {authUser ? (
+                <React.Fragment>
+                  <span>
+                    <Link
+                      className="button"
+                      to={`/course/${this.props.match.params.id}/update`}
+                    >
+                      {" "}
+                      Update Course{" "}
+                    </Link>
+                    <a className="button" href="index.html">
+                      Delete Course
+                    </a>
+                  </span>
+                </React.Fragment>
+              ) : (
+                <React.Fragment></React.Fragment>
+              )}
+
               <a className="button button-secondary" href="/">
                 Return to List
               </a>

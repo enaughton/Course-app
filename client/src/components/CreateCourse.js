@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class CreateCourse extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { course: [], user: [] };
+    this.state = { course: [] };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,7 +22,37 @@ class CreateCourse extends React.Component {
   }
 
   handleSubmit(event) {
-    alert("You changed " + this.state.title + this.state.description);
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
+
+    const {
+      course,
+      user,
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded
+    } = this.state;
+
+    context.data
+      .createCourse(course, authUser.emailAddress, authUser.password)
+      .then(error => {
+        if (error.length) {
+          this.setState({ error });
+          console.log(error);
+        } else {
+          context.actions
+            .signIn(authUser.emailAddress, authUser.password)
+            .then(() => {
+              this.props.history.push(`/courses/${this.state.course.id}`);
+            });
+        }
+      })
+      .catch(err => {
+        console.log(err && err.length);
+        this.props.history.push("/error");
+      });
+
     event.preventDefault();
   }
 
@@ -30,8 +60,8 @@ class CreateCourse extends React.Component {
     return (
       <div className="bounds course--detail">
         <div>
-          <h1>Create Course</h1>
           <form onSubmit={this.handleSubmit}>
+            <h1>Create Course</h1>
             <div className="grid-66">
               <div className="course--header">
                 <h4 className="course--label">Course</h4>

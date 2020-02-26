@@ -35,6 +35,7 @@ export default class Data {
       username,
       password
     });
+
     if (response.status === 200) {
       return response.json().then(data => data);
     } else if (response.status === 401) {
@@ -58,14 +59,31 @@ export default class Data {
     }
   }
 
-  async updateCourse(course, emailAddress, password) {
+  async createCourse(course, username, password) {
+    const response = await this.api(`/courses/`, "POST", course, {
+      username,
+      password
+    });
+    console.log(response);
+    if (response.status === 201) {
+      return [];
+    } else if (response.status === 400) {
+      return response.json().then(data => {
+        return data.errors.err.errors;
+      });
+    } else {
+      throw new Error();
+    }
+  }
+
+  async updateCourse(course, username, password) {
     const response = await this.api(
       `/courses/${course.id}`,
       "PUT",
       course,
       true,
       {
-        emailAddress,
+        username,
         password
       }
     );
@@ -82,21 +100,4 @@ export default class Data {
       throw new Error();
     }
   }
-
-  /*
-  async getCroses() {
-    const response = await this.api("/courses");
-    return response.json().then(data => data);
-  }
-  //method used to retrieve all course data
-  getCourses = async () => {
-    const response = await this.api(`/courses`, "GET", null);
-    if (response.status === 200) {
-      //returns all course data if successful
-      return response.json().then(responseData => responseData);
-    } else {
-      throw new Error();
-    }
-  };
-    */
 }

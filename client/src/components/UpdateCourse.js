@@ -42,38 +42,34 @@ class UpdateCourse extends React.Component {
 
   handleSubmit(event) {
     const { context } = this.props;
+    const authUser = context.authenticatedUser;
 
     const {
       course,
-      user,
       title,
       description,
       estimatedTime,
       materialsNeeded
     } = this.state;
-
-    const authUser = context.authenticatedUser;
-
-    // Creates Update
+    console.log(title);
     const update = {
       course,
-      user,
       title,
       description,
       estimatedTime,
       materialsNeeded
     };
-
     context.data
-      .updateCourse(course, authUser.emailAddress, authUser.password)
-      .then(errors => {
-        if (errors.length) {
-          this.setState({ errors });
+      .updateCourse(update, authUser.emailAddress, authUser.password)
+      .then(error => {
+        if (error.length) {
+          this.setState({ error });
+          console.log(error);
         } else {
           context.actions
             .signIn(authUser.emailAddress, authUser.password)
             .then(() => {
-              this.props.history.push(`/courses/${course.id}`);
+              this.props.history.push(`/courses/${this.state.course.id}`);
             });
         }
       })
@@ -137,7 +133,7 @@ class UpdateCourse extends React.Component {
                               type="text"
                               className="course--time--input"
                               onChange={this.handleInputChange}
-                              value={this.state.course.estimatedTime}
+                              value={this.state.estimatedTime}
                             />
                           </div>
                         </li>
@@ -149,7 +145,7 @@ class UpdateCourse extends React.Component {
                               name="materialsNeeded"
                               className=""
                               onChange={this.handleInputChange}
-                              value={this.state.course.materialsNeeded}
+                              value={this.state.materialsNeeded}
                             ></textarea>
                           </div>
                         </li>
