@@ -60,7 +60,7 @@ export default class Data {
   }
 
   async createCourse(course, username, password) {
-    const response = await this.api(`/courses/`, "POST", course, {
+    const response = await this.api(`/courses/`, "POST", course, true, {
       username,
       password
     });
@@ -78,7 +78,7 @@ export default class Data {
 
   async updateCourse(course, username, password) {
     const response = await this.api(
-      `/courses/${course.id}`,
+      `/courses/${course.course}`,
       "PUT",
       course,
       true,

@@ -18,7 +18,6 @@ class CreateCourse extends React.Component {
     this.setState({
       [name]: value
     });
-    console.log(this.state.title);
   }
 
   handleSubmit(event) {
@@ -26,13 +25,21 @@ class CreateCourse extends React.Component {
     const authUser = context.authenticatedUser;
 
     const {
-      course,
       user,
       title,
       description,
       estimatedTime,
       materialsNeeded
     } = this.state;
+
+    const course = {
+      user: context.authenticatedUser.userId,
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded
+    };
+    console.log(course);
 
     context.data
       .createCourse(course, authUser.emailAddress, authUser.password)
@@ -44,7 +51,7 @@ class CreateCourse extends React.Component {
           context.actions
             .signIn(authUser.emailAddress, authUser.password)
             .then(() => {
-              this.props.history.push(`/courses/${this.state.course.id}`);
+              this.props.history.push(`/courses/`);
             });
         }
       })
@@ -72,6 +79,8 @@ class CreateCourse extends React.Component {
                     type="text"
                     className="input-title course--title--input"
                     placeholder="Course title..."
+                    value={this.state.title}
+                    onChange={this.handleInputChange}
                   />
                 </div>
                 <p></p>
@@ -83,6 +92,8 @@ class CreateCourse extends React.Component {
                     name="description"
                     className=""
                     placeholder="Course description..."
+                    value={this.state.description}
+                    onChange={this.handleInputChange}
                   ></textarea>
                 </div>
               </div>
@@ -99,6 +110,8 @@ class CreateCourse extends React.Component {
                         type="text"
                         className="course--time--input"
                         placeholder="Hours"
+                        value={this.state.estimatedTime}
+                        onChange={this.handleInputChange}
                       />
                     </div>
                   </li>
@@ -110,6 +123,8 @@ class CreateCourse extends React.Component {
                         name="materialsNeeded"
                         className=""
                         placeholder="List materials..."
+                        value={this.state.materialsNeeded}
+                        onChange={this.handleInputChange}
                       ></textarea>
                     </div>
                   </li>

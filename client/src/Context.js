@@ -33,6 +33,7 @@ export class Provider extends Component {
     const user = await this.data.getUser(username, password);
 
     if (user !== null) {
+      console.log(user);
       const storedUser = Object.assign({}, user, { username, password });
       this.setState(() => {
         return { authenticatedUser: storedUser };

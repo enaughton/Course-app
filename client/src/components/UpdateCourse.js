@@ -20,7 +20,7 @@ class UpdateCourse extends React.Component {
       .then(response => response.json())
       .then(responseData => {
         this.setState({
-          course: responseData.course,
+          course: responseData.course.id,
           user: responseData.course.user,
           title: responseData.course.title,
           description: responseData.course.description,
@@ -51,7 +51,7 @@ class UpdateCourse extends React.Component {
       estimatedTime,
       materialsNeeded
     } = this.state;
-    console.log(title);
+
     const update = {
       course,
       title,
@@ -69,7 +69,7 @@ class UpdateCourse extends React.Component {
           context.actions
             .signIn(authUser.emailAddress, authUser.password)
             .then(() => {
-              this.props.history.push(`/courses/${this.state.course.id}`);
+              this.props.history.push(`/courses/${this.state.course}`);
             });
         }
       })
