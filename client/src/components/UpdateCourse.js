@@ -8,7 +8,8 @@ class UpdateCourse extends React.Component {
     this.state = {
       course: [],
       user: [],
-      authenticatedUser: Cookies.getJSON("authenticatedUser") || null
+      authenticatedUser: Cookies.getJSON("authenticatedUser") || null,
+      value: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -91,7 +92,7 @@ class UpdateCourse extends React.Component {
               <div>
                 <form onSubmit={this.handleSubmit}>
                   <div className="grid-66">
-                    <div className="course--header">
+                    <div className="course--header grid-66">
                       <label className="course--label">
                         Course Title
                         <input
@@ -117,10 +118,11 @@ class UpdateCourse extends React.Component {
                           className=""
                           value={this.state.description}
                           onChange={this.handleInputChange}
-                        ></textarea>
+                        />
                       </div>
                     </div>
                   </div>
+
                   <div className="grid-25 grid-right">
                     <div className="course--stats">
                       <ul className="course--stats--list">

@@ -31,7 +31,7 @@ class CourseDetail extends React.Component {
         <div className="actions--bar">
           <div className="bounds">
             <div className="grid-100">
-              {authUser ? (
+              {authUser.userId === this.state.user.id ? (
                 <React.Fragment>
                   <span>
                     <Link
@@ -41,9 +41,12 @@ class CourseDetail extends React.Component {
                       {" "}
                       Update Course{" "}
                     </Link>
-                    <a className="button" href="index.html">
+                    <Link
+                      className="button"
+                      to={`/course/${this.props.match.params.id}/delete`}
+                    >
                       Delete Course
-                    </a>
+                    </Link>
                   </span>
                 </React.Fragment>
               ) : (

@@ -15,7 +15,9 @@ import UserSignOut from "./components/UserSignOut";
 import UserSignUp from "./components/UserSignUp";
 import UpdateCourse from "./components/UpdateCourse";
 import CreateCourse from "./components/CreateCourse";
+import DeleteCourse from "./components/DeleteCourse";
 
+const DeleteCourseWithContext = withContext(DeleteCourse);
 const HeaderWithContext = withContext(Header);
 const AuthWithContext = withContext(Authenticated);
 const CourseDetailWithContext = withContext(CourseDetail);
@@ -44,6 +46,7 @@ export default () => (
         <Route path="/signin" component={UserSignInWithContext} />
         <Route path="/signup" component={UserSignUpWithContext} />
         <Route path="/signout" component={UserSignOutWithContext} />
+        <Route path="/course/:id/delete" component={DeleteCourseWithContext} />
         <Route component={NotFound} />
       </Switch>
     </div>

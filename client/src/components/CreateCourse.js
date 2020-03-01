@@ -24,16 +24,10 @@ class CreateCourse extends React.Component {
     const { context } = this.props;
     const authUser = context.authenticatedUser;
 
-    const {
-      user,
-      title,
-      description,
-      estimatedTime,
-      materialsNeeded
-    } = this.state;
+    const { title, description, estimatedTime, materialsNeeded } = this.state;
 
     const course = {
-      user: context.authenticatedUser.userId,
+      userId: context.authenticatedUser.userId,
       title,
       description,
       estimatedTime,
@@ -51,7 +45,7 @@ class CreateCourse extends React.Component {
           context.actions
             .signIn(authUser.emailAddress, authUser.password)
             .then(() => {
-              this.props.history.push(`/courses/`);
+              this.props.history.push(`/`);
             });
         }
       })

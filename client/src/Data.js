@@ -59,6 +59,30 @@ export default class Data {
     }
   }
 
+  async deleteCourse(course, username, password) {
+    const response = await this.api(
+      `/courses/${course.id}`,
+      "DELETE",
+      course,
+      true,
+      true,
+      {
+        username,
+        password
+      }
+    );
+    console.log(response);
+    if (response.status === 204) {
+      return [];
+    } else if (response.status === 500) {
+      return response.json().then(data => {
+        return data.errors.err.errors;
+      });
+    } else {
+      throw new Error();
+    }
+  }
+
   async createCourse(course, username, password) {
     const response = await this.api(`/courses/`, "POST", course, true, {
       username,
@@ -81,6 +105,7 @@ export default class Data {
       `/courses/${course.course}`,
       "PUT",
       course,
+      true,
       true,
       {
         username,
