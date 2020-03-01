@@ -65,7 +65,7 @@ export default class Data {
       "DELETE",
       course,
       true,
-      true,
+
       {
         username,
         password
@@ -105,7 +105,6 @@ export default class Data {
       `/courses/${course.course}`,
       "PUT",
       course,
-      true,
       true,
       {
         username,

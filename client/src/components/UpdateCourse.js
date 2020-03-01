@@ -9,7 +9,10 @@ class UpdateCourse extends React.Component {
       course: [],
       user: [],
       authenticatedUser: Cookies.getJSON("authenticatedUser") || null,
-      value: ""
+      title: "",
+      description: "",
+      estimatedTime: "",
+      materialsNeeded: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
