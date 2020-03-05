@@ -64,6 +64,7 @@ class DeleteCourse extends React.Component {
     console.log(course);
     return (
       <div>
+        <h1>Are you sure you want to Delete this Course?</h1>
         <button className="button" onClick={this.handleDelete}>
           Delete Course
         </button>

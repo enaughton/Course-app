@@ -95,8 +95,13 @@ export default class UserSignUp extends Component {
     context.data
       .createUser(user)
       .then(errors => {
-        if (errors && errors.length) {
-          this.setState({ errors });
+        if (errors) {
+          console.log(errors);
+          this.setState(() => {
+            return {
+              errors: [" Please enter Your Name, Email, and Password"]
+            };
+          });
         } else {
           context.actions.signIn(emailAddress, password).then(() => {
             this.props.history.push("/");

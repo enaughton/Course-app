@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import Form from "./Form";
 
 class UpdateCourse extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class UpdateCourse extends React.Component {
       title: "",
       description: "",
       estimatedTime: "",
-      materialsNeeded: ""
+      materialsNeeded: "",
+      errors: []
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -65,10 +67,14 @@ class UpdateCourse extends React.Component {
     };
     context.data
       .updateCourse(update, authUser.emailAddress, authUser.password)
-      .then(error => {
-        if (error.length) {
-          this.setState({ error });
-          console.log(error);
+      .then(errors => {
+        if (errors) {
+          console.log(errors);
+          this.setState(() => {
+            return {
+              errors: ["Please enter a Course Title or Course Description "]
+            };
+          });
         } else {
           context.actions
             .signIn(authUser.emailAddress, authUser.password)
@@ -81,19 +87,26 @@ class UpdateCourse extends React.Component {
         console.log(err && err.length);
         this.props.history.push("/error");
       });
-
-    event.preventDefault();
   }
 
+  cancel = () => {
+    this.props.history.push("/");
+  };
+
   render() {
+    const { errors } = this.state;
     return (
       <div>
-        <div id="root">
+        <div className="bounds course--detail">
+          <h1>Update Course</h1>
           <div>
-            <div className="bounds course--detail">
-              <h1>Update Course</h1>
-              <div>
-                <form onSubmit={this.handleSubmit}>
+            <Form
+              cancel={this.cancel}
+              errors={errors}
+              submit={this.handleSubmit}
+              submitButtonText="Update Course"
+              elements={() => (
+                <React.Fragment>
                   <div className="grid-66">
                     <div className="course--header grid-66">
                       <label className="course--label">
@@ -157,17 +170,9 @@ class UpdateCourse extends React.Component {
                       </ul>
                     </div>
                   </div>
-                  <div className="grid-100 pad-bottom">
-                    <button className="button" type="submit">
-                      Update Course
-                    </button>
-                    <Link className="button button-secondary" to={`/`}>
-                      Cancel
-                    </Link>
-                  </div>
-                </form>
-              </div>
-            </div>
+                </React.Fragment>
+              )}
+            />
           </div>
         </div>
       </div>

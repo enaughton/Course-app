@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 
+const ReactMarkdown = require("react-markdown");
 class CourseDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -31,7 +32,7 @@ class CourseDetail extends React.Component {
         <div className="actions--bar">
           <div className="bounds">
             <div className="grid-100">
-              {authUser.userId === this.state.user.id ? (
+              {authUser && authUser.userId === this.state.user.id ? (
                 <React.Fragment>
                   <span>
                     <Link
@@ -69,7 +70,7 @@ class CourseDetail extends React.Component {
               </p>
             </div>
             <div className="course--description">
-              {this.state.course.description}
+              <ReactMarkdown source={this.state.course.description} />
             </div>
           </div>
           <div className="grid-25 grid-right">
@@ -77,11 +78,15 @@ class CourseDetail extends React.Component {
               <ul className="course--stats--list">
                 <li className="course--stats--list--item">
                   <h4>Estimated Time</h4>
-                  <h3>{this.state.course.estimatedTime}</h3>
+                  <h3>
+                    <ReactMarkdown source={this.state.course.estimatedTime} />
+                  </h3>
                 </li>
                 <li className="course--stats--list--item">
                   <h4>Materials Needed</h4>
-                  <ul>{this.state.course.materialsNeeded}</ul>
+                  <ul>
+                    <ReactMarkdown source={this.state.course.materialsNeeded} />
+                  </ul>
                 </li>
               </ul>
             </div>
