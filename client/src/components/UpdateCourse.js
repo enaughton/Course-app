@@ -14,7 +14,8 @@ class UpdateCourse extends React.Component {
       description: "",
       estimatedTime: "",
       materialsNeeded: "",
-      errors: []
+      errors: [],
+      value: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -68,8 +69,8 @@ class UpdateCourse extends React.Component {
     context.data
       .updateCourse(update, authUser.emailAddress, authUser.password)
       .then(errors => {
-        if (errors) {
-          console.log(errors);
+        if (errors.length) {
+          console.log(errors.length, errors);
           this.setState(() => {
             return {
               errors: ["Please enter a Course Title or Course Description "]

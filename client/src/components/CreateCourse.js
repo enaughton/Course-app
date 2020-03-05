@@ -39,7 +39,7 @@ class CreateCourse extends React.Component {
     context.data
       .createCourse(course, authUser.emailAddress, authUser.password)
       .then(errors => {
-        if (errors) {
+        if (errors.length) {
           console.log(errors);
           this.setState(() => {
             return {
