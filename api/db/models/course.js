@@ -11,9 +11,11 @@ module.exports = sequelize => {
         autoIncrement: true
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+
+        validate: { notEmpty: true }
       },
-      description: { type: Sequelize.TEXT },
+      description: { type: Sequelize.TEXT, validate: { notEmpty: true } },
       estimatedTime: { type: Sequelize.STRING, allowNull: true },
       materialsNeeded: { type: Sequelize.STRING, allowNull: true }
     },
