@@ -73,7 +73,7 @@ class UpdateCourse extends React.Component {
           console.log(errors.length, errors);
           this.setState(() => {
             return {
-              errors: ["Please enter a Course Title or Course Description "]
+              errors: [errors]
             };
           });
         } else {
@@ -95,7 +95,15 @@ class UpdateCourse extends React.Component {
   };
 
   render() {
-    const { errors } = this.state;
+    const {
+      course,
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      errors,
+      value
+    } = this.state;
     return (
       <div>
         <div className="bounds course--detail">

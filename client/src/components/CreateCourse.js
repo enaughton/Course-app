@@ -40,10 +40,10 @@ class CreateCourse extends React.Component {
       .createCourse(course, authUser.emailAddress, authUser.password)
       .then(errors => {
         if (errors.length) {
-          console.log(errors);
+          console.log(errors.length, errors);
           this.setState(() => {
             return {
-              errors: ["Please enter a Course Title or Course Description"]
+              errors: [errors]
             };
           });
         } else {

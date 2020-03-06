@@ -93,6 +93,7 @@ export default class Data {
       return [];
     } else if (response.status === 400) {
       return response.json().then(data => {
+        console.log(data);
         return data.message;
       });
     } else {
@@ -118,6 +119,7 @@ export default class Data {
       return null;
     } else if (response.status === 400) {
       return response.json().then(data => {
+        console.log(data);
         return data.message;
       });
     } else {
