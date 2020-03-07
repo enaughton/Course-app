@@ -117,7 +117,7 @@ class UpdateCourse extends React.Component {
               elements={() => (
                 <React.Fragment>
                   <div className="grid-66">
-                    <div className="course--header grid-66">
+                    <div className="course--header ">
                       <label className="course--label">
                         Course Title
                         <input

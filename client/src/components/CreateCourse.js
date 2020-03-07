@@ -83,7 +83,7 @@ class CreateCourse extends React.Component {
                 <React.Fragment>
                   <div className="grid-66">
                     <div className="course--header">
-                      <h4 className="course--label">Course</h4>
+                      <label className="course--label">Course</label>
                       <div>
                         <input
                           id="title"
