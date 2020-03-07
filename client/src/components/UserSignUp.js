@@ -99,7 +99,7 @@ export default class UserSignUp extends Component {
           console.log(errors);
           this.setState(() => {
             return {
-              errors: [" Please enter Your Name, Email, and Password"]
+              errors: [errors]
             };
           });
         } else {

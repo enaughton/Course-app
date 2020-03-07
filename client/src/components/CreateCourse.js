@@ -5,7 +5,10 @@ import Form from "./Form";
 class CreateCourse extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { course: [], errors: [] };
+    this.state = {
+      course: [],
+      errors: []
+    };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
