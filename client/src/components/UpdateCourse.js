@@ -95,86 +95,98 @@ class UpdateCourse extends React.Component {
   };
 
   render() {
+    const authUser = this.state.authenticatedUser;
     return (
       <div>
-        <div className="bounds course--detail">
-          <h1>Update Course</h1>
-          <div>
-            <Form
-              cancel={this.cancel}
-              errors={this.state.errors}
-              submit={this.handleSubmit}
-              submitButtonText="Update Course"
-              elements={() => (
-                <React.Fragment>
-                  <div className="grid-66">
-                    <div className="course--header ">
-                      <label className="course--label">
-                        Course Title
-                        <input
-                          id="title"
-                          name="title"
-                          type="text"
-                          className="input-title course--title--input"
-                          value={this.state.title}
-                          onChange={this.handleInputChange}
-                        />
-                      </label>
+        {authUser && authUser.userId === this.state.user.id ? (
+          <React.Fragment>
+            <div className="bounds course--detail">
+              <h1>Update Course</h1>
+              <Form
+                cancel={this.cancel}
+                errors={this.state.errors}
+                submit={this.handleSubmit}
+                submitButtonText="Update Course"
+                elements={() => (
+                  <React.Fragment>
+                    <div className="grid-66">
+                      <div className="course--header ">
+                        <label className="course--label">
+                          Course Title
+                          <input
+                            id="title"
+                            name="title"
+                            type="text"
+                            className="input-title course--title--input"
+                            value={this.state.title}
+                            onChange={this.handleInputChange}
+                          />
+                        </label>
 
-                      <p>
-                        By {this.state.user.firstName}{" "}
-                        {this.state.user.lastName}
-                      </p>
-                    </div>
-                    <div className="course--description">
-                      <div>
-                        <textarea
-                          id="description"
-                          name="description"
-                          className=""
-                          value={this.state.description}
-                          onChange={this.handleInputChange}
-                        />
+                        <p>
+                          By {this.state.user.firstName}{" "}
+                          {this.state.user.lastName}
+                        </p>
+                      </div>
+                      <div className="course--description">
+                        <div>
+                          <textarea
+                            id="description"
+                            name="description"
+                            className=""
+                            value={this.state.description}
+                            onChange={this.handleInputChange}
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="grid-25 grid-right">
-                    <div className="course--stats">
-                      <ul className="course--stats--list">
-                        <li className="course--stats--list--item">
-                          <h4>Estimated Time</h4>
-                          <div>
-                            <input
-                              id="estimatedTime"
-                              name="estimatedTime"
-                              type="text"
-                              className="course--time--input"
-                              onChange={this.handleInputChange}
-                              value={this.state.estimatedTime}
-                            />
-                          </div>
-                        </li>
-                        <li className="course--stats--list--item">
-                          <h4>Materials Needed</h4>
-                          <div>
-                            <textarea
-                              id="materialsNeeded"
-                              name="materialsNeeded"
-                              className=""
-                              onChange={this.handleInputChange}
-                              value={this.state.materialsNeeded}
-                            ></textarea>
-                          </div>
-                        </li>
-                      </ul>
+                    <div className="grid-25 grid-right">
+                      <div className="course--stats">
+                        <ul className="course--stats--list">
+                          <li className="course--stats--list--item">
+                            <h4>Estimated Time</h4>
+                            <div>
+                              <input
+                                id="estimatedTime"
+                                name="estimatedTime"
+                                type="text"
+                                className="course--time--input"
+                                onChange={this.handleInputChange}
+                                value={this.state.estimatedTime}
+                              />
+                            </div>
+                          </li>
+                          <li className="course--stats--list--item">
+                            <h4>Materials Needed</h4>
+                            <div>
+                              <textarea
+                                id="materialsNeeded"
+                                name="materialsNeeded"
+                                className=""
+                                onChange={this.handleInputChange}
+                                value={this.state.materialsNeeded}
+                              ></textarea>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                </React.Fragment>
-              )}
-            />
-          </div>
-        </div>
+                  </React.Fragment>
+                )}
+              />
+            </div>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <div className="grid-100">
+              <h1> Pst, You aren't suppose to be here!</h1>
+              <a className="button button-secondary" href="/">
+                Return to List
+              </a>
+            </div>
+          </React.Fragment>
+        )}
       </div>
     );
   }

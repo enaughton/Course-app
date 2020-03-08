@@ -37,14 +37,14 @@ class CourseDetail extends React.Component {
                   <span>
                     <Link
                       className="button"
-                      to={`/course/${this.props.match.params.id}/update`}
+                      to={`/courses/${this.props.match.params.id}/update`}
                     >
                       {" "}
                       Update Course{" "}
                     </Link>
                     <Link
                       className="button"
-                      to={`/course/${this.props.match.params.id}/delete`}
+                      to={`/courses/${this.props.match.params.id}/delete`}
                     >
                       Delete Course
                     </Link>

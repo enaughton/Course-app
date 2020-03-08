@@ -8,11 +8,19 @@ export default class UserSignUp extends Component {
     lastName: "",
     emailAddress: "",
     password: "",
+    confirmPassword: "",
     errors: []
   };
 
   render() {
-    const { firstName, lastName, emailAddress, password, errors } = this.state;
+    const {
+      firstName,
+      lastName,
+      emailAddress,
+      password,
+      confirmPassword,
+      errors
+    } = this.state;
 
     return (
       <div className="bounds">
@@ -57,6 +65,14 @@ export default class UserSignUp extends Component {
                   onChange={this.change}
                   placeholder="Password"
                 />
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="confirmPassword"
+                  value={confirmPassword}
+                  onChange={this.change}
+                  placeholder="Confirm Password"
+                />
               </React.Fragment>
             )}
           />
@@ -82,7 +98,13 @@ export default class UserSignUp extends Component {
 
   submit = () => {
     const { context } = this.props;
-    const { firstName, lastName, emailAddress, password } = this.state;
+    const {
+      firstName,
+      lastName,
+      emailAddress,
+      password,
+      confirmPassword
+    } = this.state;
 
     // Create user
     const user = {
@@ -92,26 +114,34 @@ export default class UserSignUp extends Component {
       password
     };
     console.log(user);
-    context.data
-      .createUser(user)
-      .then(errors => {
-        if (errors.length) {
-          console.log(errors);
-          this.setState(() => {
-            return {
-              errors: [errors]
-            };
-          });
-        } else {
-          context.actions.signIn(emailAddress, password).then(() => {
-            this.props.history.push("/");
-          });
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        this.props.history.push("/error");
+    if (confirmPassword != password) {
+      this.setState(() => {
+        return {
+          errors: ["Password Does Not Match Confirm Password"]
+        };
       });
+    } else {
+      context.data
+        .createUser(user)
+        .then(errors => {
+          if (errors.length) {
+            console.log(errors);
+            this.setState(() => {
+              return {
+                errors: [errors]
+              };
+            });
+          } else {
+            context.actions.signIn(emailAddress, password).then(() => {
+              this.props.history.push("/");
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          this.props.history.push("/error");
+        });
+    }
   };
 
   cancel = () => {
