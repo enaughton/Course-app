@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Form from "./Form";
 
 class CreateCourse extends React.Component {
@@ -7,7 +6,11 @@ class CreateCourse extends React.Component {
     super(props);
     this.state = {
       course: [],
-      errors: []
+      errors: [],
+      title: "",
+      description: "",
+      estimatedTime: "",
+      materialsNeeded: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);

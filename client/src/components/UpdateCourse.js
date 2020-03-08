@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import Cookies from "js-cookie";
 import Form from "./Form";
 
@@ -95,15 +95,6 @@ class UpdateCourse extends React.Component {
   };
 
   render() {
-    const {
-      course,
-      title,
-      description,
-      estimatedTime,
-      materialsNeeded,
-      errors,
-      value
-    } = this.state;
     return (
       <div>
         <div className="bounds course--detail">
@@ -111,7 +102,7 @@ class UpdateCourse extends React.Component {
           <div>
             <Form
               cancel={this.cancel}
-              errors={errors}
+              errors={this.state.errors}
               submit={this.handleSubmit}
               submitButtonText="Update Course"
               elements={() => (
