@@ -10,10 +10,30 @@ module.exports = sequelize => {
         primaryKey: true,
         autoIncrement: true
       },
-      firstName: { type: Sequelize.STRING, allowNull: false },
-      lastName: { type: Sequelize.STRING, allowNull: false },
-      emailAddress: { type: Sequelize.STRING, allowNull: false },
-      password: { type: Sequelize.STRING, allowNull: false }
+      firstName: {
+        type: Sequelize.STRING,
+        notEmpty: true,
+        allowNull: false,
+        validate: { notEmpty: true }
+      },
+      lastName: {
+        type: Sequelize.STRING,
+        notEmpty: true,
+        allowNull: false,
+        validate: { notEmpty: true }
+      },
+      emailAddress: {
+        type: Sequelize.STRING,
+        notEmpty: true,
+        allowNull: false,
+        validate: { notEmpty: true }
+      },
+      password: {
+        type: Sequelize.STRING,
+        notEmpty: true,
+        allowNull: false,
+        validate: { notEmpty: true }
+      }
     },
     { sequelize }
   );
