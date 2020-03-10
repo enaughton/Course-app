@@ -1,6 +1,8 @@
 "use strict";
 const Sequelize = require("sequelize");
 
+// Course Model for Sequelize
+
 module.exports = sequelize => {
   class Course extends Sequelize.Model {}
   Course.init(
