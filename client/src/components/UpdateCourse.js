@@ -3,6 +3,8 @@ import React from "react";
 import Cookies from "js-cookie";
 import Form from "./Form";
 
+// UpdateCourse Updates the Course  to only the Auth User, and the Owner
+
 class UpdateCourse extends React.Component {
   constructor(props) {
     super(props);
@@ -36,6 +38,7 @@ class UpdateCourse extends React.Component {
         });
       });
   }
+  //handleInputChange() handles the changing input fields
 
   handleInputChange(event) {
     const target = event.target;
@@ -46,6 +49,8 @@ class UpdateCourse extends React.Component {
       [name]: value
     });
   }
+
+  // handleSubmit handles the Updating of the Course and Deals with any Errors
 
   handleSubmit(event) {
     const { context } = this.props;
@@ -85,9 +90,9 @@ class UpdateCourse extends React.Component {
         this.props.history.push("/error");
       });
   }
-
+  // cancel goes back to the Course Detail Page
   cancel = () => {
-    this.props.history.push("/");
+    this.props.history.push(`/courses/${this.state.course}`);
   };
 
   render() {

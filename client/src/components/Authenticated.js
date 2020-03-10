@@ -1,5 +1,6 @@
 import React from "react";
 
+// AuthenticatedUser is used to display the SignedIn User's Information
 export default ({ context }) => {
   const authUser = context.authenticatedUser;
   return (

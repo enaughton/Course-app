@@ -1,9 +1,9 @@
+// Imports of Components
+
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 import withContext from "./Context";
 import PrivateRoute from "./PrivateRoute";
-
 import "./global.css";
 import Header from "./components/Header";
 import Authenticated from "./components/Authenticated";
@@ -17,6 +17,7 @@ import UpdateCourse from "./components/UpdateCourse";
 import CreateCourse from "./components/CreateCourse";
 import DeleteCourse from "./components/DeleteCourse";
 
+// withContext with Components to be passed Context throughout the App
 const DeleteCourseWithContext = withContext(DeleteCourse);
 const HeaderWithContext = withContext(Header);
 const AuthWithContext = withContext(Authenticated);
@@ -31,6 +32,9 @@ export default () => (
   <Router>
     <HeaderWithContext />
     <div>
+      {/* 
+        The Routes for the Project. 
+      */}
       <Switch>
         <Route exact path="/" component={Courses} />
         <PrivateRoute

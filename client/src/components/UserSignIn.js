@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Form from "./Form";
 
+//This Component Signs In a User who already has an exisiting Email Address
+
 export default class UserSignIn extends Component {
   state = {
     emailAddress: "",
@@ -50,7 +52,7 @@ export default class UserSignIn extends Component {
       </div>
     );
   }
-
+  // change handles the changing input fields
   change = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -61,7 +63,7 @@ export default class UserSignIn extends Component {
       };
     });
   };
-
+  // submit handles the submitting of the Form and Handles any Errors
   submit = () => {
     const { context } = this.props;
     const { from } = this.props.location.state || {
@@ -86,6 +88,7 @@ export default class UserSignIn extends Component {
       });
   };
 
+  //cancel returns the User back to the Course Screen
   cancel = () => {
     this.props.history.push("/");
   };

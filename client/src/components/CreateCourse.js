@@ -2,6 +2,8 @@ import React from "react";
 
 import Form from "./Form";
 
+//This Component Creates a Course, a User HAS to be Logged in.
+
 class CreateCourse extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +19,7 @@ class CreateCourse extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  //handleInputChange() handles the changing input fields
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -28,6 +30,7 @@ class CreateCourse extends React.Component {
     });
   }
 
+  // handleSubmit handles the Creation of the Course and Deals with any Errors
   handleSubmit(event) {
     const { context } = this.props;
     const authUser = context.authenticatedUser;

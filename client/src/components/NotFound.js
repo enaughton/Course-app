@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+//NotFound is displayed if the Route is Not Found
+
 export default () => (
   <div className="bounds">
     <h1>Not Found</h1>

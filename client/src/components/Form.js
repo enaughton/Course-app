@@ -1,5 +1,5 @@
 import React from "react";
-
+// Form is used in UserSignIn, UserSignUp, CreateCourse, and UpdateCourse Components
 export default props => {
   const { cancel, errors, submit, submitButtonText, elements } = props;
 

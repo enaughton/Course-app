@@ -12,7 +12,7 @@ class CourseDetail extends React.Component {
       authenticatedUser: Cookies.getJSON("authenticatedUser") || null
     };
   }
-
+  // This CourseDetail Component Displays the Course Data returned from the API
   componentDidMount() {
     fetch(`http://localhost:5000/api/courses/${this.props.match.params.id}`)
       .then(response => response.json())

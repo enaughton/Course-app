@@ -1,5 +1,7 @@
 import config from "./config";
 
+// Data file has some Helper Functions and works along side of Context
+
 export default class Data {
   api(
     path,
@@ -29,7 +31,7 @@ export default class Data {
     }
     return fetch(url, options);
   }
-
+  // getUser is used to GET User Data
   async getUser(username, password) {
     const response = await this.api(`/users`, "GET", null, true, {
       username,
@@ -44,7 +46,7 @@ export default class Data {
       throw new Error();
     }
   }
-
+  // createUser is used to Create a User
   async createUser(user) {
     const response = await this.api("/users", "POST", user);
     console.log(response);
@@ -58,7 +60,7 @@ export default class Data {
       throw new Error();
     }
   }
-
+  // deleteCourse is used to Delete a Course
   async deleteCourse(course, username, password) {
     const response = await this.api(
       `/courses/${course.id}`,
@@ -82,7 +84,7 @@ export default class Data {
       throw new Error();
     }
   }
-
+  // createCourse is used to Create a Course
   async createCourse(course, username, password) {
     const response = await this.api(`/courses/`, "POST", course, true, {
       username,
@@ -100,7 +102,7 @@ export default class Data {
       throw new Error();
     }
   }
-
+  // updateCourse is used to Update a Course
   async updateCourse(course, username, password) {
     const response = await this.api(
       `/courses/${course.course}`,
