@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import Form from "./Form";
 
 class CreateCourse extends React.Component {
@@ -54,11 +54,7 @@ class CreateCourse extends React.Component {
             };
           });
         } else {
-          context.actions
-            .signIn(authUser.emailAddress, authUser.password)
-            .then(() => {
-              this.props.history.push(`/`);
-            });
+          this.props.history.push(`/`);
         }
       })
       .catch(err => {

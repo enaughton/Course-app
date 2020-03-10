@@ -13,22 +13,13 @@ export default class UserSignUp extends Component {
   };
 
   render() {
-    const {
-      firstName,
-      lastName,
-      emailAddress,
-      password,
-      confirmPassword,
-      errors
-    } = this.state;
-
     return (
       <div className="bounds">
         <div className="grid-33 centered signin">
           <h1>Sign Up</h1>
           <Form
             cancel={this.cancel}
-            errors={errors}
+            errors={this.state.errors}
             submit={this.submit}
             submitButtonText="Sign Up"
             elements={() => (
@@ -37,7 +28,7 @@ export default class UserSignUp extends Component {
                   id="firstName"
                   name="firstName"
                   type="text"
-                  value={firstName}
+                  value={this.state.firstName}
                   onChange={this.change}
                   placeholder="First Name"
                 />
@@ -45,7 +36,7 @@ export default class UserSignUp extends Component {
                   id="lastName"
                   name="lastName"
                   type="text"
-                  value={lastName}
+                  value={this.state.lastName}
                   onChange={this.change}
                   placeholder="Last Name"
                 />
@@ -53,7 +44,7 @@ export default class UserSignUp extends Component {
                   id="emailAddress"
                   name="emailAddress"
                   type="text"
-                  value={emailAddress}
+                  value={this.state.emailAddress}
                   onChange={this.change}
                   placeholder="Email Address"
                 />
@@ -61,15 +52,15 @@ export default class UserSignUp extends Component {
                   id="password"
                   name="password"
                   type="password"
-                  value={password}
+                  value={this.state.password}
                   onChange={this.change}
                   placeholder="Password"
                 />
                 <input
                   id="confirmPassword"
                   name="confirmPassword"
-                  type="confirmPassword"
-                  value={confirmPassword}
+                  type="password"
+                  value={this.state.confirmPassword}
                   onChange={this.change}
                   placeholder="Confirm Password"
                 />
@@ -114,7 +105,7 @@ export default class UserSignUp extends Component {
       password
     };
     console.log(user);
-    if (confirmPassword != password) {
+    if (confirmPassword !== password) {
       this.setState(() => {
         return {
           errors: ["Password Does Not Match Confirm Password"]

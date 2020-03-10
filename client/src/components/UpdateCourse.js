@@ -77,11 +77,7 @@ class UpdateCourse extends React.Component {
             };
           });
         } else {
-          context.actions
-            .signIn(authUser.emailAddress, authUser.password)
-            .then(() => {
-              this.props.history.push(`/courses/${this.state.course}`);
-            });
+          this.props.history.push(`/courses/${this.state.course}`);
         }
       })
       .catch(err => {
