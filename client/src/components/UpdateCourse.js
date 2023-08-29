@@ -1,141 +1,196 @@
 import React from "react";
 
-const UpdateCourse = props => {
-  return (
-    <div>
-      <div id="root">
-        <div>
-          <div className="header">
-            <div className="bounds">
-              <h1 className="header--logo">Courses</h1>
-              <nav>
-                <span>Welcome Joe Smith!</span>
-                <a className="signout" href="index.html">
-                  Sign Out
-                </a>
-              </nav>
-            </div>
-          </div>
+import Cookies from "js-cookie";
+import Form from "./Form";
 
-          <div className="bounds course--detail">
-            <h1>Update Course</h1>
-            <div>
-              <form>
-                <div className="grid-66">
-                  <div className="course--header">
-                    <h4 className="course--label">Course</h4>
-                    <div>
-                      <input
-                        id="title"
-                        name="title"
-                        type="text"
-                        className="input-title course--title--input"
-                        placeholder="Course title..."
-                        value="Build a Basic Bookcase"
-                      />
-                    </div>
-                    <p>By Joe Smith</p>
-                  </div>
-                  <div className="course--description">
-                    <div>
-                      <textarea
-                        id="description"
-                        name="description"
-                        className=""
-                        placeholder="Course description..."
-                      >
-                        High-end furniture projects are great to dream about.
-                        But unless you have a well-equipped shop and some
-                        serious woodworking experience to draw on, it can be
-                        difficult to turn the dream into a reality. Not every
-                        piece of furniture needs to be a museum showpiece,
-                        though. Often a simple design does the job just as well
-                        and the experience gained in completing it goes a long
-                        way toward making the next project even better. Our pine
-                        bookcase, for example, features simple construction and
-                        it's designed to be built with basic woodworking tools.
-                        Yet, the finished project is a worthy and useful
-                        addition to any room of the house. While it's meant to
-                        rest on the floor, you can convert the bookcase to a
-                        wall-mounted storage unit by leaving off the baseboard.
-                        You can secure the cabinet to the wall by screwing
-                        through the cabinet cleats into the wall studs. We made
-                        the case out of materials available at most
-                        building-supply dealers and lumberyards, including 1/2 x
-                        3/4-in. parting strip, 1 x 2, 1 x 4 and 1 x 10 common
-                        pine and 1/4-in.-thick lauan plywood. Assembly is quick
-                        and easy with glue and nails, and when you're done with
-                        construction you have the option of a painted or clear
-                        finish. As for basic tools, you'll need a portable
-                        circular saw, hammer, block plane, combination square,
-                        tape measure, metal rule, two clamps, nail set and putty
-                        knife. Other supplies include glue, nails, sandpaper,
-                        wood filler and varnish or paint and shellac. The
-                        specifications that follow will produce a bookcase with
-                        overall dimensions of 10 3/4 in. deep x 34 in. wide x 48
-                        in. tall. While the depth of the case is directly tied
-                        to the 1 x 10 stock, you can vary the height, width and
-                        shelf spacing to suit your needs. Keep in mind, though,
-                        that extending the width of the cabinet may require the
-                        addition of central shelf supports.
-                      </textarea>
-                    </div>
-                  </div>
-                </div>
-                <div className="grid-25 grid-right">
-                  <div className="course--stats">
-                    <ul className="course--stats--list">
-                      <li className="course--stats--list--item">
-                        <h4>Estimated Time</h4>
-                        <div>
+// UpdateCourse Updates the Course  to only the Auth User, and the Owner
+
+class UpdateCourse extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      course: [],
+      user: [],
+      authenticatedUser: Cookies.getJSON("authenticatedUser") || null,
+      title: "",
+      description: "",
+      estimatedTime: "",
+      materialsNeeded: "",
+      errors: [],
+      value: ""
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    fetch(`http://localhost:5000/api/courses/${this.props.match.params.id}`)
+      .then(response => response.json())
+      .then(responseData => {
+        this.setState({
+          course: responseData.course.id,
+          user: responseData.course.user,
+          title: responseData.course.title,
+          description: responseData.course.description,
+          estimatedTime: responseData.course.estimatedTime,
+          materialsNeeded: responseData.course.materialsNeeded
+        });
+      });
+  }
+  //handleInputChange() handles the changing input fields
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  // handleSubmit handles the Updating of the Course and Deals with any Errors
+
+  handleSubmit(event) {
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
+
+    const {
+      course,
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded
+    } = this.state;
+
+    const update = {
+      course,
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded
+    };
+    context.data
+      .updateCourse(update, authUser.emailAddress, authUser.password)
+      .then(errors => {
+        if (errors.length) {
+          console.log(errors.length, errors);
+          this.setState(() => {
+            return {
+              errors: [errors]
+            };
+          });
+        } else {
+          this.props.history.push(`/courses/${this.state.course}`);
+        }
+      })
+      .catch(err => {
+        console.log(err && err.length);
+        this.props.history.push("/error");
+      });
+  }
+  // cancel goes back to the Course Detail Page
+  cancel = () => {
+    this.props.history.push(`/courses/${this.state.course}`);
+  };
+
+  render() {
+    const authUser = this.state.authenticatedUser;
+    return (
+      <div>
+        {authUser && authUser.userId === this.state.user.id ? (
+          <React.Fragment>
+            <div className="bounds course--detail">
+              <h1>Update Course</h1>
+              <Form
+                cancel={this.cancel}
+                errors={this.state.errors}
+                submit={this.handleSubmit}
+                submitButtonText="Update Course"
+                elements={() => (
+                  <React.Fragment>
+                    <div className="grid-66">
+                      <div className="course--header ">
+                        <label className="course--label">
+                          Course Title
                           <input
-                            id="estimatedTime"
-                            name="estimatedTime"
+                            id="title"
+                            name="title"
                             type="text"
-                            className="course--time--input"
-                            placeholder="Hours"
-                            value="14 hours"
+                            className="input-title course--title--input"
+                            value={this.state.title}
+                            onChange={this.handleInputChange}
                           />
-                        </div>
-                      </li>
-                      <li className="course--stats--list--item">
-                        <h4>Materials Needed</h4>
+                        </label>
+
+                        <p>
+                          By {this.state.user.firstName}{" "}
+                          {this.state.user.lastName}
+                        </p>
+                      </div>
+                      <div className="course--description">
                         <div>
                           <textarea
-                            id="materialsNeeded"
-                            name="materialsNeeded"
+                            id="description"
+                            name="description"
                             className=""
-                            placeholder="List materials..."
-                          >
-                            * 1/2 x 3/4 inch parting strip * 1 x 2 common pine *
-                            1 x 4 common pine * 1 x 10 common pine * 1/4 inch
-                            thick lauan plywood * Finishing Nails * Sandpaper *
-                            Wood Glue * Wood Filler * Minwax Oil Based
-                            Polyurethane
-                          </textarea>
+                            value={this.state.description}
+                            onChange={this.handleInputChange}
+                          />
                         </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="grid-100 pad-bottom">
-                  <button className="button" type="submit">
-                    Update Course
-                  </button>
-                  <button
-                    className="button button-secondary"
-                    onclick="event.preventDefault(); location.href='course-detail.html';"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
+                      </div>
+                    </div>
+
+                    <div className="grid-25 grid-right">
+                      <div className="course--stats">
+                        <ul className="course--stats--list">
+                          <li className="course--stats--list--item">
+                            <h4>Estimated Time</h4>
+                            <div>
+                              <input
+                                id="estimatedTime"
+                                name="estimatedTime"
+                                type="text"
+                                className="course--time--input"
+                                onChange={this.handleInputChange}
+                                value={this.state.estimatedTime}
+                              />
+                            </div>
+                          </li>
+                          <li className="course--stats--list--item">
+                            <h4>Materials Needed</h4>
+                            <div>
+                              <textarea
+                                id="materialsNeeded"
+                                name="materialsNeeded"
+                                className=""
+                                onChange={this.handleInputChange}
+                                value={this.state.materialsNeeded}
+                              ></textarea>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </React.Fragment>
+                )}
+              />
             </div>
-          </div>
-        </div>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <div className="grid-100">
+              <h1> Pst, You aren't suppose to be here!</h1>
+              <a className="button button-secondary" href="/">
+                Return to List
+              </a>
+            </div>
+          </React.Fragment>
+        )}
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default UpdateCourse;

@@ -1,6 +1,8 @@
 "use strict";
 const Sequelize = require("sequelize");
 
+// Course Model for Sequelize
+
 module.exports = sequelize => {
   class Course extends Sequelize.Model {}
   Course.init(
@@ -11,9 +13,15 @@ module.exports = sequelize => {
         autoIncrement: true
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: { notEmpty: true }
       },
-      description: { type: Sequelize.TEXT },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+        validate: { notEmpty: true }
+      },
       estimatedTime: { type: Sequelize.STRING, allowNull: true },
       materialsNeeded: { type: Sequelize.STRING, allowNull: true }
     },

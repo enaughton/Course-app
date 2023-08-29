@@ -8,7 +8,7 @@ const { models } = require("./db");
 const { User, Course } = models; //database connection
 const auth = require("basic-auth");
 const bcryptjs = require("bcryptjs");
-const cors = require("cors")
+const cors = require("cors");
 
 asyncHandler;
 function asyncHandler(cb) {
@@ -46,7 +46,7 @@ const app = express();
 // setup morgan which gives us http request logging
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cors()  )
+app.use(cors());
 
 // setup a friendly greeting for the root route
 app.get("/", (req, res) => {
@@ -113,7 +113,8 @@ app.get("/api/users", authenticateUser, (req, res) => {
   res.status(200).json({
     emailAddress: user.emailAddress,
     firstName: user.firstName,
-    lastName: user.lastName
+    lastName: user.lastName,
+    userId: user.id
   });
 });
 
